@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ul {
+    list-style-type: disc;
+    /* 点 */
+    /* list-style-type: circle; 中空圆圈 */
+    /* list-style-type: square; 正方形 */
+}
+
+ol {
+    list-style-type: decimal;
+}
