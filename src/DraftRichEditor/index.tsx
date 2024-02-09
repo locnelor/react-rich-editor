@@ -1,6 +1,7 @@
-import Draft, { ContentBlock, Editor, EditorState } from "draft-js"
-import { CSSProperties, useCallback, useEffect, useMemo, useRef } from "react"
+import Draft, { ContentBlock, Editor, EditorState, Modifier } from "draft-js"
+import { CSSProperties, useCallback, useEffect, useRef } from "react"
 import Immutable from "immutable"
+import { AtomicBlockImage, imageBlockName } from "src/components/AtomicImage";
 
 const HeaderOneWrapper = (props: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -40,15 +41,14 @@ const DraftRichEditor = ({
         ref.current.editor.style.minHeight = "200px";
     }, []);
     const customStyleFn = useCallback((
-        style: Draft.DraftInlineStyle,
-        // block: Draft.ContentBlock
+        style: Draft.DraftInlineStyle
     ) => {
         const arr = style.toList().toArray()
         const result: CSSProperties = {};
         for (const value of arr) {
             const [name, type, color] = value.split("-")
             if (name === "color") {
-                if (type === "font") {
+                if (type === "color") {
                     result.color = color
                 } else if (type === "background") {
                     result.backgroundColor = color;
@@ -64,6 +64,17 @@ const DraftRichEditor = ({
         if (!!textAlign) classes.push(`text-${textAlign}`);
         return classes.join(" ");
     }, []);
+    const onTab = useCallback((e: React.KeyboardEvent<{}>) => {
+        e.preventDefault();
+        const newContentState = Modifier.replaceText(
+            editorState.getCurrentContent(),
+            editorState.getSelection(),
+            "    "
+        );
+        onChange(
+            EditorState.push(editorState, newContentState, "insert-characters")
+        )
+    }, [editorState]);
     const blockRendererFn = useCallback((block: ContentBlock) => {
         const type = block.getType();
         if (type === "atomic") {
@@ -80,8 +91,11 @@ const DraftRichEditor = ({
                     onChange
                 },
                 component: null,
-            }
+            } as any
             switch (entityType) {
+                case imageBlockName:
+                    method.component = AtomicBlockImage;
+                    break;
                 default:
                     return;
             }
@@ -93,6 +107,7 @@ const DraftRichEditor = ({
             ref={ref}
             editorState={editorState}
             onChange={onChange}
+            onTab={onTab}
             blockRendererFn={blockRendererFn}
             customStyleFn={customStyleFn}
             blockRenderMap={blockRenderMap}
