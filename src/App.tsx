@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
-import DraftRichEditor from './DraftRichEditor';
+import DraftRichEditor, { createEmpty } from './DraftRichEditor';
 import { EditorState } from 'draft-js';
 import DraftToolbar from './DraftRichEditor/DraftToolbar';
 
 function App() {
-  const [state, setState] = useState(EditorState.createEmpty());
+  const [state, setState] = useState(createEmpty());
   const onChange = useCallback((value: EditorState) => {
     setState(value);
   }, [])

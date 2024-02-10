@@ -1,7 +1,8 @@
-import Draft, { ContentBlock, Editor, EditorState, Modifier } from "draft-js"
+import Draft, { CompositeDecorator, ContentBlock, Editor, EditorState, Modifier } from "draft-js"
 import { CSSProperties, useCallback, useEffect, useRef } from "react"
 import Immutable from "immutable"
 import { AtomicBlockImage, imageBlockName } from "src/components/AtomicImage";
+import LinkDecorator from "src/components/DecoratorLink";
 
 const HeaderOneWrapper = (props: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -28,6 +29,11 @@ export type DraftRichEditorProps = {
     onChange: (editorState: EditorState) => void,
     editorState: EditorState,
     readOnly?: boolean
+}
+export const createEmpty = () => {
+    return EditorState.createEmpty(new CompositeDecorator([
+        LinkDecorator
+    ]))
 }
 const DraftRichEditor = ({
     editorState,
