@@ -76,7 +76,7 @@ export const withColor = (colorType: string, icon: any) => {
                 // 消除多余样式
                 for (const name of list) {
                     const [id, type] = name.split("-");
-                    if (id === "color" && type === colorType && name != styleName) {
+                    if (id === "color" && type === colorType && name !== styleName) {
                         state = RichUtils.toggleInlineStyle(state, name);
                     }
                 }

@@ -21,7 +21,7 @@ const withBlockStyle = (
         const onMouseDown = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             e.preventDefault();
             onChange(setBlockData(editorState, data));
-        }, [editorState]);
+        }, [editorState, onChange]);
         return (
             <ToggleButton
                 value={name}

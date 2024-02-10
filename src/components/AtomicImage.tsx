@@ -18,8 +18,8 @@ export const AtomicBlockImage = withAtomic<AtomicBlockImageData>(({
 }) => {
     const onDoubleClick = useCallback(() => {
         if (readOnly) return;
-        
-    }, [editorState, onChange])
+
+    }, [editorState, onChange, readOnly])
     return (
         <div onDoubleClick={onDoubleClick}>
             <img src={!!url ? url : base64} alt="" />
