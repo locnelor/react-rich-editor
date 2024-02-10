@@ -26,7 +26,7 @@ export const AtomicBlockImage = withAtomic<AtomicBlockImageData>(({
         </div>
     )
 })
-export const imageBlockName = "IMAGE"
+export const ImageBlockName = "IMAGE"
 export type AtomicBlockImageData = {
     base64: string,
     url: string,
@@ -55,7 +55,7 @@ const AtomicImage = withToggleButton(({
                 fileToCanvas(file)
                     .then((canvas) => {
                         const base64 = canvas.toDataURL("jpg");
-                        insertBlock(onChange, editorState, imageBlockName, {
+                        insertBlock(onChange, editorState, ImageBlockName, {
                             base64,
                             type: "image"
                         })

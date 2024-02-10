@@ -1,8 +1,9 @@
 import Draft, { CompositeDecorator, ContentBlock, Editor, EditorState, Modifier } from "draft-js"
 import { CSSProperties, useCallback, useEffect, useRef } from "react"
 import Immutable from "immutable"
-import { AtomicBlockImage, imageBlockName } from "src/components/AtomicImage";
+import { AtomicBlockImage, ImageBlockName } from "src/components/AtomicImage";
 import LinkDecorator from "src/components/DecoratorLink";
+import { AtomicBlockDivider, DividerBlockName } from "src/components/AtomicDivider";
 
 const HeaderOneWrapper = (props: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -99,8 +100,11 @@ const DraftRichEditor = ({
                 component: null,
             } as any
             switch (entityType) {
-                case imageBlockName:
+                case ImageBlockName:
                     method.component = AtomicBlockImage;
+                    break;
+                case DividerBlockName:
+                    method.component = AtomicBlockDivider;
                     break;
                 default:
                     return;
