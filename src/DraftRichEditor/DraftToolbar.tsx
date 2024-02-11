@@ -9,6 +9,7 @@ import { withColor } from "src/hooks/withColor"
 import AtomicImage from "src/components/AtomicImage"
 import Link from "src/components/Link"
 import Divider from "src/components/AtomicDivider"
+import Code from "src/components/AtomicCode"
 
 
 export const ToolbarSet: { [k in string]: (props: ToggleButtonEditorPtops) => JSX.Element } = {
@@ -65,7 +66,8 @@ export const ToolbarSet: { [k in string]: (props: ToggleButtonEditorPtops) => JS
     ),
     Image: AtomicImage,
     Link,
-    Divider
+    Divider,
+    Code
 }
 export const ToolbarConfig = [
     ["Bold", "Italic", "Underline", "Strikethrough"],

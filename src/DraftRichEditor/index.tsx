@@ -4,6 +4,7 @@ import Immutable from "immutable"
 import { AtomicBlockImage, ImageBlockName } from "src/components/AtomicImage";
 import LinkDecorator from "src/components/DecoratorLink";
 import { AtomicBlockDivider, DividerBlockName } from "src/components/AtomicDivider";
+import { AtomicBlockCode, CodeBlockName } from "src/components/AtomicCode";
 
 const HeaderOneWrapper = (props: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -105,6 +106,9 @@ const DraftRichEditor = ({
                     break;
                 case DividerBlockName:
                     method.component = AtomicBlockDivider;
+                    break;
+                case CodeBlockName:
+                    method.component = AtomicBlockCode;
                     break;
                 default:
                     return;
