@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import DraftRichEditor, { createEmpty } from './DraftRichEditor';
 import { EditorState } from 'draft-js';
 import DraftToolbar from './DraftRichEditor/DraftToolbar';
-import UiSelect, { UiOption } from './components/ui/UiSelect';
 
 function App() {
   const [state, setState] = useState(createEmpty());
