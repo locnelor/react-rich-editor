@@ -5,7 +5,8 @@ import ToggleButton, { ToggleButtonEditorPtops } from "src/components/ToggleButt
 
 const withInlineStyle = (
     Component: () => JSX.Element,
-    style: string
+    style: string,
+    title: string
 ) => {
     const Result = ({
         editorState,
@@ -27,6 +28,7 @@ const withInlineStyle = (
                 value={style}
                 className={!!currentStyle?.has(style) ? checkClassName : className}
                 onMouseDown={onMouseDown}
+                title={title}
             >
                 <Component />
             </ToggleButton>

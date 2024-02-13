@@ -7,6 +7,8 @@ export const insertBlock = (
     blockName: string,
     data: any
 ) => {
+    // const content = editorState.getCurrentContent();
+    // const e = content.createEntity(blockName,"IMMUTABLE",data);
 
     const entityKey = Entity.create(blockName, "IMMUTABLE", data);
     const state = AtomicBlockUtils.insertAtomicBlock(
@@ -15,6 +17,15 @@ export const insertBlock = (
         ' '
     );
     onChange(state);
+
+    // const content = editorState.getCurrentContent();
+    // const entityKey = content.createEntity(blockName, "IMMUTABLE", data);
+    // const state = AtomicBlockUtils.insertAtomicBlock(
+    //     editorState,
+    //     entityKey,
+    //     ' '
+    // );
+    // onChange(state);
 }
 export const mergeBlock = (
     block: ContentBlock,

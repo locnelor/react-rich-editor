@@ -7,7 +7,8 @@ import useCurrentBlockType from "./useCurrentBlockType";
 
 const withBlockType = (
     Component: () => JSX.Element,
-    blockType: string
+    blockType: string,
+    title: string
 ) => {
     const Result = ({
         editorState,
@@ -26,6 +27,7 @@ const withBlockType = (
                 value={blockType}
                 className={currentType === blockType ? checkClassName : className}
                 onMouseDown={onMouseDown}
+                title={title}
             >
                 <Component />
             </ToggleButton>

@@ -60,7 +60,7 @@ const colors = [
         "511B78"
     ]
 ]
-export const withColor = (colorType: string, icon: any) => {
+export const withColor = (colorType: string, icon: any, title: string) => {
     return withToggleButton(({
         className,
         editorState,
@@ -87,7 +87,7 @@ export const withColor = (colorType: string, icon: any) => {
         return (
             <Popover >
                 <PopoverTrigger asChild>
-                    <ToggleButton className={className} value={colorType}>
+                    <ToggleButton title={title} className={className} value={colorType}>
                         {icon}
                     </ToggleButton>
                 </PopoverTrigger>

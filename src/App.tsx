@@ -20,7 +20,7 @@ function App() {
         editorState={state}
         onChange={onChange}
       />
-    </div>
+    </div >
   );
 }
 

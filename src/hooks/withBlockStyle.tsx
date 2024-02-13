@@ -8,7 +8,8 @@ const withBlockStyle = (
     Component: () => JSX.Element,
     name: string,
     fn: (e: Immutable.Map<string, unknown>) => boolean,
-    data: any
+    data: any,
+    title: string
 ) => {
     const Result = ({
         editorState,
@@ -27,6 +28,7 @@ const withBlockStyle = (
                 value={name}
                 className={check ? checkClassName : className}
                 onMouseDown={onMouseDown}
+                title={title}
             >
                 <Component />
             </ToggleButton>
