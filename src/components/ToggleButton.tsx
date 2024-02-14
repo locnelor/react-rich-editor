@@ -1,7 +1,6 @@
 import { ToolbarToggleGroup, ToolbarToggleItem, ToolbarToggleItemProps } from "@radix-ui/react-toolbar";
 import { EditorState } from "draft-js";
 import { forwardRef } from "react";
-import { Tooltip, TooltipContent, TooltipPortal, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 import UiTooltip from "./ui/UiTooltip";
 export const ToggleGroupButton = ToolbarToggleGroup
 export type ToggleButtonEditorPtops = {

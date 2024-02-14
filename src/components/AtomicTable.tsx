@@ -7,8 +7,8 @@ import classNames from "classnames";
 import { insertBlock, mergeBlock } from "src/hooks/blockUtil";
 import openModal from "./openModal";
 import UiButton from "./ui/UiButton";
-import UiTable, { UiTableBody, UiTableCell, UiTableHead, UiTableHeadCell, UiTableRow } from "./ui/UiTable";
-import { TextFieldInput } from "@radix-ui/themes";
+import UiTable from "./ui/UiTable";
+import UiInput from "./ui/UiInput";
 
 const EditTable = ({
     onFinish,
@@ -38,37 +38,42 @@ const EditTable = ({
     }, [data]);
     return (
         <div>
-            <UiTable className="table-auto">
-                <UiTableHead>
-                    <UiTableRow>
-                        {headData.map((value, key) => (
-                            <UiTableHeadCell key={key}>
-                                <input
-                                    value={value}
-                                    onChange={onChangeHead.bind(null, key)}
-                                />
-                            </UiTableHeadCell>
-                        ))}
-                    </UiTableRow>
-                </UiTableHead>
-                <UiTableBody>
-                    {data.map((line, row) => {
-                        return (
-                            <UiTableRow key={row}>
-                                {line.map((value, col) => (
-                                    <UiTableCell key={`${row}-${col}`}>
-                                        <TextFieldInput
+            <div className="w-full overflow-x-auto">
+                <div style={{ minWidth: data[0].length * 100 + "px" }}>
+                    <UiTable className="min-w-full">
+                        <thead>
+                            <tr>
+                                {headData.map((value, key) => (
+                                    <th className="min-w-3" key={key}>
+                                        <UiInput
+                                            className="min-w-3"
                                             value={value}
-                                            onChange={onChangeData.bind(null, row, col)}
+                                            onChange={onChangeHead.bind(null, key)}
                                         />
-                                    </UiTableCell>
+                                    </th>
                                 ))}
-                            </UiTableRow>
-                        )
-                    })}
-                </UiTableBody>
-            </UiTable>
-            <div className="flex justify-end">
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((line, row) => {
+                                return (
+                                    <tr key={row}>
+                                        {line.map((value, col) => (
+                                            <td className="min-w-3" key={`${row}-${col}`}>
+                                                <UiInput
+                                                    value={value}
+                                                    onChange={onChangeData.bind(null, row, col)}
+                                                />
+                                            </td>
+                                        ))}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </UiTable>
+                </div>
+            </div>
+            <div className="flex mt-2 justify-end">
                 <UiButton
                     onClick={onSubmit}
                 >
@@ -118,30 +123,30 @@ export const AtomicBlockTable = withAtomic<AtomicBlockTableData>(({
         })
     }, [editorState, onChange, readOnly])
     return (
-        <div className=" overflow-x-auto overflow-y-auto" onDoubleClick={onDoubleClick}>
-            <UiTable variant="surface">
-                <UiTableHead>
-                    <UiTableRow>
+        <div className="overflow-x-auto overflow-y-auto" onDoubleClick={onDoubleClick}>
+            <UiTable>
+                <thead>
+                    <tr>
                         {head.map((value, key) => (
-                            <UiTableHeadCell className="py-3 px-6 bg-gray-200 text-gray-700 uppercase tracking-wider" key={key}>
+                            <th key={key}>
                                 {value}
-                            </UiTableHeadCell>
+                            </th>
                         ))}
-                    </UiTableRow>
-                </UiTableHead>
-                <UiTableBody>
+                    </tr>
+                </thead>
+                <tbody>
                     {table.map((line, row) => {
                         return (
-                            <UiTableRow key={row}>
+                            <tr key={row}>
                                 {line.map((value, col) => (
-                                    <UiTableCell className="py-4 px-6 border-b" key={`${row}-${col}`}>
+                                    <td key={`${row}-${col}`}>
                                         {value}
-                                    </UiTableCell>
+                                    </td>
                                 ))}
-                            </UiTableRow>
+                            </tr>
                         )
                     })}
-                </UiTableBody>
+                </tbody>
             </UiTable>
         </div>
     )

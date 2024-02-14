@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
-import UiModal from "./ui/UiModal";
+import UiModal, { UiModalTitle } from "./ui/UiModal";
+import { useEffect, useRef } from 'react';
 
 
 export type OpenModalProps = {
@@ -10,10 +11,8 @@ export type OpenModalProps = {
 const openModal = (props: OpenModalProps) => {
 
     const container = document.createElement("div");
-    const body = document.getElementById("EditorTheme");
-    if (!body) return () => { };
+    const body = document.body;
     body.appendChild(container);
-
     const App = ReactDOM.createRoot(
         container
     )
@@ -30,20 +29,27 @@ const openModal = (props: OpenModalProps) => {
     return destroy;
 }
 export default openModal
-
 const OpenModalDom = ({
     title,
     description,
     context,
     destory
 }: OpenModalProps & { destory: () => void }) => {
+    const ref = useRef<HTMLDialogElement>(null);
+    useEffect(() => {
+        ref.current?.showModal()
+    }, []);
     return (
         <UiModal
-            open={true}
-            onOpenChange={destory}
-            title={title}
-            description={description}
+            onCancel={destory}
+            ref={ref}
         >
+            <UiModalTitle>
+                {title}
+            </UiModalTitle>
+            <div>
+                {description}
+            </div>
             {context}
         </UiModal>
     )
