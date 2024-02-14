@@ -11,7 +11,7 @@ const UiTooltip = ({
     return (
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     {trigger}
                 </TooltipTrigger>
                 <TooltipPortal>

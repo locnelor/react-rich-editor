@@ -90,7 +90,7 @@ export const AtomicBlockCode = withAtomic<AtomicCodeData>(({
                         className="mt-2"
                     />
                     <div className="flex justify-end">
-                        <UiButton className="mt-2" type="submit">
+                        <UiButton className="mt-2" submit>
                             提交
                         </UiButton>
                     </div>

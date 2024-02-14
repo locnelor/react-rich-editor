@@ -1,9 +1,20 @@
-import { Table } from "@radix-ui/themes"
+import classNames from "classnames"
+import { TableHTMLAttributes, forwardRef } from "react"
 
-const UiTable = Table.Root
-export const UiTableHead = Table.Header
-export const UiTableRow = Table.Row
-export const UiTableHeadCell = Table.ColumnHeaderCell
-export const UiTableCell = Table.Cell
-export const UiTableBody = Table.Body
+
+const UiTable = forwardRef<
+    HTMLTableElement,
+    TableHTMLAttributes<HTMLTableElement>
+>(({ className, ...props }, ref) => {
+    return (
+        <table
+            className={classNames(
+                "table table-zebra",
+                className
+            )}
+            {...props}
+            ref={ref}
+        />
+    )
+})
 export default UiTable
