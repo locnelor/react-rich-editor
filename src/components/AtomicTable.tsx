@@ -27,7 +27,7 @@ const EditTable = ({
     const [headData, setHead] = useState<string[]>([...head])
     const onSubmit = useCallback(() => {
         onFinish(data, headData);
-    }, [data, headData]);
+    }, [data, headData, onFinish]);
     const onChangeHead = useCallback((index: number, { target: { value } }: any) => {
         headData[index] = value;
         setHead([...headData]);
@@ -121,7 +121,7 @@ export const AtomicBlockTable = withAtomic<AtomicBlockTableData>(({
                 />
             )
         })
-    }, [editorState, onChange, readOnly])
+    }, [editorState, onChange, readOnly, table, head, block])
     return (
         <div className="overflow-x-auto overflow-y-auto" onDoubleClick={onDoubleClick}>
             <UiTable>
@@ -181,7 +181,7 @@ const Table = withToggleButton(({
                 </ToggleButton>
             )}
         >
-            {index != -1 ? `${Math.floor(index / 10) + 1}x${index % 10 + 1}` : "0x0"}
+            {index !== -1 ? `${Math.floor(index / 10) + 1}x${index % 10 + 1}` : "0x0"}
             {new Array(10).fill(0).map((_, row) => {
                 return (
                     <div className="grid grid-cols-10 gap-1 mb-1" key={row}>

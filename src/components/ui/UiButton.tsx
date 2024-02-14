@@ -28,7 +28,7 @@ const UiButton = forwardRef<
         if (!!type) arr.push(`btn-${type}`)
         if (!!size) arr.push(`btn-size`);
         return arr.join(" ");
-    }, [className])
+    }, [type, size])
     return (
         <button
             {...props}

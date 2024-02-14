@@ -7,14 +7,16 @@ import { AtomicBlockDivider, DividerBlockName } from "src/components/AtomicDivid
 import { AtomicBlockCode, CodeBlockName } from "src/components/AtomicCode";
 import { AtomicBlockTable, TableBlockName } from "src/components/AtomicTable";
 
-const HeaderOneWrapper = (props: any) => {
+const HeaderOneWrapper = ({ children, type, ...props }: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
     useEffect(() => {
-        const id = props.type + "_" + props["data-offset-key"].split("-")[0]
+        const id = type + "_" + props["data-offset-key"].split("-")[0]
         if (ref.current) ref.current.id = id;
-    }, [props.children]);
+    }, [children, type, props]);
     return (
-        <h1 ref={ref} style={{ fontWeight: "bold" }} {...props} />
+        <h1 ref={ref} style={{ fontWeight: "bold" }} {...props} >
+            {children}
+        </h1>
     )
 }
 const blockRenderMap = Draft.DefaultDraftBlockRenderMap.merge(Immutable.Map({
@@ -83,7 +85,7 @@ const DraftRichEditor = ({
         onChange(
             EditorState.push(editorState, newContentState, "insert-characters")
         )
-    }, [editorState]);
+    }, [editorState, onChange]);
     const blockRendererFn = useCallback((block: ContentBlock) => {
         const type = block.getType();
         if (type === "atomic") {
@@ -119,7 +121,7 @@ const DraftRichEditor = ({
             }
             return method;
         }
-    }, [editorState, readOnly]);
+    }, [editorState, readOnly, onChange]);
     return (
         <Editor
             ref={ref}

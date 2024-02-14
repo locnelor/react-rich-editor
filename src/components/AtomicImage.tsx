@@ -10,18 +10,20 @@ export const AtomicBlockImage = withAtomic<AtomicBlockImageData>(({
         base64,
         url
     },
-    blockProps: {
-        editorState,
-        onChange,
-        readOnly
-    }
+    // blockProps: {
+    //     editorState,
+    //     onChange,
+    //     readOnly
+    // }
 }) => {
-    const onDoubleClick = useCallback(() => {
-        if (readOnly) return;
+    // const onDoubleClick = useCallback(() => {
+    //     if (readOnly) return;
 
-    }, [editorState, onChange, readOnly])
+    // }, [editorState, onChange, readOnly])
     return (
-        <div onDoubleClick={onDoubleClick}>
+        <div
+        // onDoubleClick={onDoubleClick}
+        >
             <img src={!!url ? url : base64} alt="" />
         </div>
     )
@@ -62,7 +64,7 @@ const AtomicImage = withToggleButton(({
                     })
             }
         })
-    }, [editorState, onChange]);
+    }, [editorState, onChange, open]);
     return (
         <ToggleButton
             value={"Image"}

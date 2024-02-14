@@ -98,7 +98,7 @@ export const AtomicBlockCode = withAtomic<AtomicCodeData>(({
             ),
             title: "修改代码"
         })
-    }, [editorState, onChange, readOnly]);
+    }, [editorState, onChange, readOnly, language, block, context]);
     return (
         <div className="text-slate-400 overflow-y-auto bg-slate-700 p-3 rounded">
             <code>

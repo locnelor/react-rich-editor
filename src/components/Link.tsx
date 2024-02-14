@@ -1,8 +1,7 @@
 import withToggleButton from "src/hooks/withToggleButton";
 import ToggleButton from "./ToggleButton";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { EditorState, Modifier } from "draft-js";
-import UiModal from "./ui/UiModal";
 import openModal from "./openModal";
 
 
