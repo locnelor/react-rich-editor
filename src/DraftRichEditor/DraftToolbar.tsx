@@ -10,6 +10,7 @@ import AtomicImage from "src/components/AtomicImage"
 import Link from "src/components/Link"
 import Divider from "src/components/AtomicDivider"
 import Code from "src/components/AtomicCode"
+import Table from "src/components/AtomicTable"
 
 
 export const ToolbarSet: { [k in string]: (props: ToggleButtonEditorPtops) => JSX.Element } = {
@@ -72,7 +73,8 @@ export const ToolbarSet: { [k in string]: (props: ToggleButtonEditorPtops) => JS
     Image: AtomicImage,
     Link,
     Divider,
-    Code
+    Code,
+    Table
 }
 export const ToolbarConfig = [
     ["Bold", "Italic", "Underline", "Strikethrough"],
@@ -83,7 +85,7 @@ export const ToolbarConfig = [
     "|",
     ["Color", "BgColor", "Image", "Link"],
     "|",
-    ["Divider", "Code", "Card", "Table", "Math"]
+    ["Divider", "Code", "Table", "Math"]
 ]
 export type DraftToolbarProps = {
     editorState: EditorState,

@@ -10,14 +10,16 @@ export type OpenModalProps = {
 const openModal = (props: OpenModalProps) => {
 
     const container = document.createElement("div");
-    document.body.appendChild(container);
+    const body = document.getElementById("EditorTheme");
+    if (!body) return () => { };
+    body.appendChild(container);
 
     const App = ReactDOM.createRoot(
         container
     )
     const destroy = () => {
         App.unmount()
-        document.body.removeChild(container);
+        body.removeChild(container);
     };
     App.render((
         <OpenModalDom
@@ -29,7 +31,7 @@ const openModal = (props: OpenModalProps) => {
 }
 export default openModal
 
-export const OpenModalDom = ({
+const OpenModalDom = ({
     title,
     description,
     context,

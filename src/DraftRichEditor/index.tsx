@@ -5,6 +5,9 @@ import { AtomicBlockImage, ImageBlockName } from "src/components/AtomicImage";
 import LinkDecorator from "src/components/DecoratorLink";
 import { AtomicBlockDivider, DividerBlockName } from "src/components/AtomicDivider";
 import { AtomicBlockCode, CodeBlockName } from "src/components/AtomicCode";
+import { AtomicBlockTable, TableBlockName } from "src/components/AtomicTable";
+import '@radix-ui/themes/styles.css';
+import { Button, Theme } from "@radix-ui/themes";
 
 const HeaderOneWrapper = (props: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -110,6 +113,9 @@ const DraftRichEditor = ({
                 case CodeBlockName:
                     method.component = AtomicBlockCode;
                     break;
+                case TableBlockName:
+                    method.component = AtomicBlockTable;
+                    break;
                 default:
                     return;
             }
@@ -117,17 +123,19 @@ const DraftRichEditor = ({
         }
     }, [editorState, readOnly]);
     return (
-        <Editor
-            ref={ref}
-            editorState={editorState}
-            onChange={onChange}
-            onTab={onTab}
-            blockRendererFn={blockRendererFn}
-            customStyleFn={customStyleFn}
-            blockRenderMap={blockRenderMap}
-            blockStyleFn={blockStyleFn}
-            readOnly={readOnly}
-        />
+        <Theme id="EditorTheme">
+            <Editor
+                ref={ref}
+                editorState={editorState}
+                onChange={onChange}
+                onTab={onTab}
+                blockRendererFn={blockRendererFn}
+                customStyleFn={customStyleFn}
+                blockRenderMap={blockRenderMap}
+                blockStyleFn={blockStyleFn}
+                readOnly={readOnly}
+            />
+        </Theme>
     )
 }
 export default DraftRichEditor
