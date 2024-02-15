@@ -1,12 +1,18 @@
 import Draft, { CompositeDecorator, ContentBlock, Editor, EditorState, Modifier } from "draft-js"
-import { CSSProperties, useCallback, useEffect, useRef } from "react"
+import { CSSProperties, createContext, useCallback, useEffect, useRef } from "react"
 import Immutable from "immutable"
 import { AtomicBlockImage, ImageBlockName } from "src/components/AtomicImage";
-import LinkDecorator from "src/components/DecoratorLink";
+import LinkDecorator from "src/components/LinkDecorator";
 import { AtomicBlockDivider, DividerBlockName } from "src/components/AtomicDivider";
 import { AtomicBlockCode, CodeBlockName } from "src/components/AtomicCode";
 import { AtomicBlockTable, TableBlockName } from "src/components/AtomicTable";
+import MathDecorator from "src/components/MathDecorator";
 
+export const DraftRichContext = createContext({
+    mathBaseURL: "/math"
+});
+export const DraftRichPrivider = DraftRichContext.Provider
+export const DraftRichConsumer = DraftRichContext.Consumer
 const HeaderOneWrapper = ({ children, type, ...props }: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
     useEffect(() => {
@@ -37,7 +43,8 @@ export type DraftRichEditorProps = {
 }
 export const createEmpty = () => {
     return EditorState.createEmpty(new CompositeDecorator([
-        LinkDecorator
+        LinkDecorator,
+        MathDecorator
     ]))
 }
 const DraftRichEditor = ({

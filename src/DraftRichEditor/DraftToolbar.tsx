@@ -11,6 +11,7 @@ import Link from "src/components/Link"
 import Divider from "src/components/AtomicDivider"
 import Code from "src/components/AtomicCode"
 import Table from "src/components/AtomicTable"
+import InlineMath from "src/components/InlineMath"
 
 
 export const ToolbarSet: { [k in string]: (props: ToggleButtonEditorPtops) => JSX.Element } = {
@@ -74,9 +75,10 @@ export const ToolbarSet: { [k in string]: (props: ToggleButtonEditorPtops) => JS
     Link,
     Divider,
     Code,
-    Table
+    Table,
+    Math: InlineMath
 }
-export const ToolbarConfig = [
+export const ToolbarList = [
     ["Bold", "Italic", "Underline", "Strikethrough"],
     "|",
     ["Left", "Center", "Right"],
@@ -90,15 +92,15 @@ export const ToolbarConfig = [
 export type DraftToolbarProps = {
     editorState: EditorState,
     onChange: (editorState: EditorState) => void,
-    config?: (string | string[])[],
+    list?: (string | string[])[],
     ToolbarItemClassName?: string,
     ToolbarCheckClassName?: string,
-    className?: string
+    className?: string,
 }
 const DraftToolbar = ({
     editorState,
     onChange,
-    config = ToolbarConfig,
+    list = ToolbarList,
     ToolbarItemClassName = "flex-shrink-0 flex-grow-0 basis-auto text-mauve11 h-[25px] px-[5px] rounded inline-flex text-[13px] leading-none items-center justify-center ml-0.5 outline-none hover:bg-violet3 hover:text-violet11",
     ToolbarCheckClassName = "flex-shrink-0 flex-grow-0 basis-auto text-mauve11 h-[25px] px-[5px] rounded inline-flex text-[13px] leading-none items-center justify-center bg-white ml-0.5 outline-none bg-violet4 text-violet11 hover:bg-violet3 hover:text-violet11",
     className = "flex p-[10px] w-full min-w-max rounded-md  shadow-[0_2px_10px] shadow-blackA4"
@@ -107,7 +109,7 @@ const DraftToolbar = ({
         <Toolbar
             className={className}
         >
-            {config.map((type, key) => {
+            {list.map((type, key) => {
                 if (typeof type === "string") {
                     return (
                         <ToolbarSeparator
