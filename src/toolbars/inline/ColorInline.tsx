@@ -89,7 +89,7 @@ const ColorInline = ({
         const styleName = `color-${type}-#${color}`;
         for (const color of colors) state = RichUtils.toggleInlineStyle(state, color)
 
-        if (!!color) state = RichUtils.toggleInlineStyle(state, styleName);
+        if (!!color && color !== "none") state = RichUtils.toggleInlineStyle(state, styleName);
         onChange(state);
     }, [editorState, onChange])
 

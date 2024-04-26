@@ -10,7 +10,7 @@ const Color = (rest: any) => {
     return <ColorInline {...rest} type="color" >color</ColorInline>
 }
 const BgColor = (rest: any) => {
-    return <ColorInline {...rest} type="bg" >bg</ColorInline>
+    return <ColorInline {...rest} type="background" >bg</ColorInline>
 }
 const StyledToolbar = styled("div", {
     display: "flex",
