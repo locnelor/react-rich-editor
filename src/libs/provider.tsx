@@ -2,6 +2,7 @@ import Draft from "draft-js";
 import { createContext, useRef, useEffect } from "react"
 import React from "react";
 import * as Immutable from "immutable"
+import { styled } from "@stitches/react";
 
 const HeaderOneWrapper = ({ children, type, ...props }: any) => {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -15,6 +16,13 @@ const HeaderOneWrapper = ({ children, type, ...props }: any) => {
         </h1>
     )
 }
+// bg-base-200 pl-2 pr-2 border-l-2 border-blue-500
+const Blockquote = styled("div", {
+    // --tw-bg-opacity: 1
+    paddingLeft: "4px",
+    paddingRight: "4px",
+    borderLeft: "2px solid #3f51bf"
+})
 export const RichEditorDefaultContext = {
     language: 'zh',
     styleMap: {
@@ -44,7 +52,7 @@ export const RichEditorDefaultContext = {
             wrapper: <HeaderOneWrapper type="h3" style={{ fontSize: "26px" }} />
         },
         blockquote: {
-            wrapper: <div className="bg-base-200 pl-2 pr-2 border-l-2 border-blue-500" />
+            wrapper: <Blockquote />
         }
     }))
 }

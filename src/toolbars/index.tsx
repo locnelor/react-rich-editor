@@ -5,6 +5,8 @@ import UiLine from "react-open-rich-editor/components/UiLine"
 import { styled } from "@stitches/react"
 import ColorInline from "./inline/ColorInline"
 import LinkInline from "./inline/LinkInline"
+import { blockKeys } from "react-open-rich-editor/hooks/useBlock"
+import withBlock from "./block/withBlock"
 
 const Color = (rest: any) => {
     return <ColorInline {...rest} type="color" >color</ColorInline>
@@ -17,7 +19,11 @@ const StyledToolbar = styled("div", {
     flexWrap: "wrap",
     gap: "2px"
 })
-const InlineItems = [...inlineKeys.map(key => WithInline(key)), UiLine, Color, BgColor, LinkInline];
+const InlineItems = [
+    ...inlineKeys.map(key => WithInline(key)), UiLine,
+    Color, BgColor, LinkInline, UiLine,
+    ...blockKeys.map(key => withBlock(key))
+];
 //加粗、倾斜、下划线、删除线、标签√
 //字体颜色、背景颜色√ 标题、链接
 //左对齐、居中对齐、右对齐
