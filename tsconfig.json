@@ -1,32 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {},
-    "strictNullChecks": true,
-    "module": "esnext",
-    "moduleResolution": "Bundler",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "jsx": "react-jsx",
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "noImplicitAny": true,
-    "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "strict": true,
+    "declaration": true,
     "skipLibCheck": true,
-    "stripInternal": true,
-    "resolvePackageJsonExports": true
+    "esModuleInterop": true,
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"],
+      "react-open-rich-editor": ["src"],
+      "react-open-rich-editor/*": ["src/*", "*"]
+    }
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "lib",
-    "es"
-  ]
+  "include": [".dumirc.ts", "src/**/*"]
 }
