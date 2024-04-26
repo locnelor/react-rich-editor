@@ -1,10 +1,8 @@
-import { Close } from "@icon-park/react";
-import { PopoverClose, PopoverArrow } from "@radix-ui/react-popover";
 import { styled } from "@stitches/react";
 import { RichUtils } from "draft-js";
 import React, { useCallback, useMemo } from "react"
 import { BaseProps, UiButton, useCurrentColor } from "react-open-rich-editor"
-import UiPopover, { UiPopoverContent, UiPopoverPortal, UiPopoverTrigger } from "react-open-rich-editor/components/UiPopover";
+import UiPopover from "react-open-rich-editor/components/UiPopover";
 const colorList = [
     [
         "none",
@@ -101,31 +99,22 @@ const ColorInline = ({
     }, [colors])
 
     return (
-        <UiPopover>
-            <UiPopoverTrigger>
-                <UiButton style={{ backgroundColor }}>
-                    {children}
-                </UiButton>
-            </UiPopoverTrigger>
-            <UiPopoverPortal>
-                <UiPopoverContent sideOffset={5}>
-                    {colorList.map((list, key) => (
-                        <ColorContainer key={key}>
-                            {list.map((color) => (
-                                <ColorItem
-                                    key={color}
-                                    style={{ background: `#${color}` }}
-                                    onMouseDown={onMouseDown.bind(null, color)}
-                                />
-                            ))}
-                        </ColorContainer>
+        <UiPopover trigger={(
+            <UiButton style={{ backgroundColor }}>
+                {children}
+            </UiButton>
+        )}>
+            {colorList.map((list, key) => (
+                <ColorContainer key={key}>
+                    {list.map((color) => (
+                        <ColorItem
+                            key={color}
+                            style={{ background: `#${color}` }}
+                            onMouseDown={onMouseDown.bind(null, color)}
+                        />
                     ))}
-                    <PopoverClose aria-label="Close">
-                        <Close />
-                    </PopoverClose>
-                    <PopoverArrow />
-                </UiPopoverContent>
-            </UiPopoverPortal>
+                </ColorContainer>
+            ))}
         </UiPopover>
     )
 }

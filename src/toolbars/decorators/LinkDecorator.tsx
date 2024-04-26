@@ -1,7 +1,7 @@
 
 import { styled } from "@stitches/react";
 import React from "react";
-import withDecorator from "react-open-rich-editor/libs/withDecorator";
+import withDecorator from "react-open-rich-editor/toolbars/decorators/withDecorator";
 
 const StyledLink = styled("a", {
     color: "#3f51bf",
