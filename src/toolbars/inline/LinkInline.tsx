@@ -1,6 +1,7 @@
 import { mauve, violet } from "@radix-ui/colors";
 import { styled } from "@stitches/react";
-import React from "react"
+import { EditorState, Modifier } from "draft-js";
+import React, { useCallback, useState } from "react"
 import { BaseProps } from "react-open-rich-editor";
 import UiButton from "react-open-rich-editor/components/UiButton"
 import UiPopover from "react-open-rich-editor/components/UiPopover"
@@ -26,7 +27,6 @@ const Input = styled('input', {
     color: violet.violet11,
     boxShadow: `0 0 0 1px ${violet.violet7}`,
     height: 25,
-
     '&:focus': { boxShadow: `0 0 0 2px ${violet.violet8}` },
 });
 
@@ -47,7 +47,23 @@ const LinkInline = ({
     editorState,
     onChange
 }: BaseProps) => {
-
+    const [href, setHref] = useState("");
+    const [description, setDescription] = useState("");
+    const onFinish = useCallback(() => {
+        const selection = editorState.getSelection();
+        const entityKey = editorState
+            .getCurrentContent()
+            .createEntity("LINK", "MUTABLE", { href })
+            .getLastCreatedEntityKey()
+        const contentState = Modifier.replaceText(
+            editorState.getCurrentContent(),
+            selection,
+            (description || href) as string,
+            editorState.getCurrentInlineStyle(),
+            entityKey
+        )
+        onChange(EditorState.push(editorState, contentState, "insert-characters"));
+    }, [href, description, editorState, onChange])
     return (
         <UiPopover
             trigger={(
@@ -60,14 +76,14 @@ const LinkInline = ({
                 <Text css={{ marginBottom: 10 }}>添加链接</Text>
                 <Fieldset>
                     <Label htmlFor="width">链接地址</Label>
-                    <Input id="width" defaultValue="100%" />
+                    <Input value={href} onChange={({ target: { value } }) => setHref(value)} />
                 </Fieldset>
                 <Fieldset>
                     <Label htmlFor="maxWidth">描述</Label>
-                    <Input id="maxWidth" defaultValue="300px" />
+                    <Input value={description} onChange={({ target: { value } }) => setDescription(value)} />
                 </Fieldset>
                 <Fieldset>
-                    <UiButton>添加</UiButton>
+                    <UiButton onClick={onFinish}>添加</UiButton>
                 </Fieldset>
             </Flex>
 

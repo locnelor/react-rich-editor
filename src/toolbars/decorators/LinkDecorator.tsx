@@ -18,7 +18,7 @@ const LinkDecorator = withDecorator(({
             href={href}
             {...rest}
             target="_blank"
-            title="link"
+            title={href}
         >
             {children}
         </StyledLink>
