@@ -8,6 +8,6 @@ const UiLine = styled("div", {
     marginTop: "2px",
     marginBottom: "2px",
     background: "#ccc"
-})
+}) as any
 
 export default UiLine

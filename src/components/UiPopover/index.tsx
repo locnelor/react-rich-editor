@@ -1,6 +1,6 @@
 import * as Popover from "@radix-ui/react-popover";
 import { keyframes, styled } from "@stitches/react";
-import { violet } from '@radix-ui/colors';
+import { mauve, violet } from '@radix-ui/colors';
 import React from "react";
 import { Close } from "@icon-park/react";
 
@@ -70,6 +70,8 @@ export const UiPopoverRoot = Popover.Root
 export type UiPopoverProps = React.PropsWithChildren<{
     trigger: React.ReactNode
 }>
+
+
 const UiPopover = ({
     trigger,
     children
